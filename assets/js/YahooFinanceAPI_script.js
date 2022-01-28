@@ -1,7 +1,32 @@
 --------------------------- YAHOO FINANCE API ------------------------------
 
 
-//Fetch Stock data from four symbols using the yahoo finance API, jsons
+//Fetch Stock data from four symbols using the yahoo finance API, jsons it into an object, then uses the object in stocklist function 
+
+
+// NOTE: V1 NOT WORKING ----- USE V2
+fetch(“https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=AMC%2CGME%2CNOK%2CBB%2", configuration)
+
+.then(function(response){
+    return response.jason();
+    
+    
+
+))
+
+
+
+// V2 takes SYMBOL as 1st parameter, OPTIONS as 2nd.
+yahooFinanceV2.historical(symbol, { period1 });
+[
+  {
+    date, open, high, low, close, adjClose, volume,
+    // symbol NOT included
+  },
+  // ...
+]
+
+
 
 
 const request = require('request');
