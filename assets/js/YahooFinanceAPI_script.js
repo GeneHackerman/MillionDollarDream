@@ -1,6 +1,8 @@
 --------------------------- YAHOO FINANCE API ------------------------------
 
 
+//Fetch Stock data from four symbols using the yahoo finance API, jsons
+
 
 const request = require('request');
 
