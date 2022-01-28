@@ -1,4 +1,4 @@
---------------------------- YAHOO FINANCE API ------------------------------
+// --------------------------- YAHOO FINANCE API ------------------------------
 
 
 //Fetch Stock data from four symbols using the yahoo finance API, jsons it into an object, then uses the object in stocklist function 
