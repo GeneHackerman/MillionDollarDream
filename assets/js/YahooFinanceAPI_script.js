@@ -5,27 +5,37 @@
 
 
 // NOTE: V1 NOT WORKING ----- USE V2
-fetch(“https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?region=US&symbols=AMC%2CGME%2CNOK%2CBB%2", configuration)
+fetch(“https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2022-01-01/2022-01-28?apiKey=mNgHEk6aL2MGcLCcUpq470Xhd4l8FCJK", configuration)
 
 .then(function(response){
     return response.jason();
     
-    
 
+    
 ))
 
 
 
-// V2 takes SYMBOL as 1st parameter, OPTIONS as 2nd.
-yahooFinanceV2.historical(symbol, { period1 });
-[
-  {
-    date, open, high, low, close, adjClose, volume,
-    // symbol NOT included
-  },
-  // ...
-]
 
+
+
+//NOTE 2 =  WE DON'T GIVE A F_$#%* ABOUT HISTORICAL DATA.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   ------------------------------------ // PART II // ----------------------------------------
 
 
 
@@ -68,7 +78,7 @@ const getHistoricalPrices = function (
             }
 
             try {
-                const prices = JSON.parse(body.split('HistoricalPriceStore\":{\"prices\":')[1].split(',"isPending')[0]);
+                const prices = JSON.parse(body.split('HistoricalPriceStore\":{\"prices\":')[1].split(',"isPending')[0]); // Change This Historical crap. No Historical data!
 
                 resolve(prices);
             } catch (err) {
