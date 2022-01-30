@@ -33,3 +33,7 @@
     background-color: var(--secondary);
     color: var(--primary);
   }
+
+  #feedDiv {
+      padding: 2% 4%;
+  }
