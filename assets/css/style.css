@@ -2,7 +2,7 @@
     --primary: #2ecc71;
     --secondary: #16a085;
     --tertiary: #f1c40f;
-    --dark: #38302e;
+    --gold: 
     --border-radius: .3rem;
   }
 
@@ -40,8 +40,8 @@
   }
 
   main {
-    margin: 20px 0 auto 20px;
-    width: 40%;
+    margin: 20px 0 auto 30px;
+    width: 30%;
   }
 
 h1,
@@ -65,7 +65,7 @@ h6 {
 
 .card-header {
   color: var(--primary);
-  background-color: var(--dark);
+  /* background-color: var(--gold); <-- card header color undecided for now */  
   padding: 2.5%;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
 }
