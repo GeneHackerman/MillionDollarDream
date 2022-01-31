@@ -21,10 +21,29 @@
 <!-- sample header -->
 <body class="flex-column min-100-vh">
     <header class="hero">
-      <h1 class="app-title">C.R.E.A.M.</h1>
+      <h1 class="app-title">C.R.E.A.M.</h1> <!-- placeholder name atm -->
       <p>Crypto Rules Everything Around Me</p>
     </header>
 
     
+  <main class="flex-row justify-space-between">
+    <div class="col-12 col-md-8">
+      <div class="card">
+        <h3 class="card-header text-uppercase">Search By Stock or Crypto Currency</h3>
+        <form id="user-form" class="card-body">
+          <label class="form-label" for="username">Stock/Crypto Name</label>
+          <input name="username" id="username" type="text" autofocus="true" class="form-input" />
+          <button type="submit" class="btn">CHASE THE BAG</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 class="card-header text-uppercase">Filter by Search</h3>
+        <div class="card-body" id="language-buttons">
+          <button class="btn" data-language="crypto">Crypto Currency</button>
+          <button class="btn" data-language="stocks">Stock Exchange</button>
+        </div>
+      </div>
+    </div>
 
+    
 </body>
