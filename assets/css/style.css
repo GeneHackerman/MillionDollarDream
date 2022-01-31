@@ -32,9 +32,12 @@
     padding: 1% 2%;
     background-color: var(--secondary);
     color: var(--primary);
-    background-image: url("../images/1.png");
-    background-position: center;
-    background-size: 10%;
+  }
+
+  .img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
   }
 
   #feedDiv {
