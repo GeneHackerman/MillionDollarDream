@@ -32,6 +32,9 @@
     padding: 1% 2%;
     background-color: var(--secondary);
     color: var(--primary);
+    background-image: url("../images/1.png");
+    background-position: center;
+    background-size: 10%;
   }
 
   #feedDiv {
@@ -58,12 +61,12 @@ h6 {
 
 .app-title {
   font-size: 3rem;
-  background-color: var(--tertiary);
-  color: var(--secondary);
-  padding: 0 10px;
+  background-color: var(--primary);
+  color: var(--tertiary);
+  padding: 10px 20px;
   display: inline-block;
   border-radius: var(--border-radius);
-  box-shadow: 6px 5px var(--light-dark);
+  box-shadow: 6px 5px var(--tertiary);
 }
 
 /* CARDS */
