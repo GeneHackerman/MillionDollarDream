@@ -56,6 +56,16 @@ h6 {
   line-height: 1.25;
 }
 
+.app-title {
+  font-size: 3rem;
+  background-color: var(--tertiary);
+  color: var(--secondary);
+  padding: 0 10px;
+  display: inline-block;
+  border-radius: var(--border-radius);
+  box-shadow: 6px 5px var(--light-dark);
+}
+
 /* CARDS */
 .card {
   margin: 0 0 20px 0;
