@@ -31,9 +31,14 @@
   .hero {
     padding: 1% 2%;
     background-color: var(--secondary);
-    color: var(--primary);
-    background-image: url("../images/1.png");
-    background-size: 10%;    
+    color: var(--primary);    
+  }
+
+  .img {
+    padding: 0 10px 10px;
+    margin-left: 300px; 
+    margin-bottom: -20px;
+    margin-top: -150px;
   }
 
 
@@ -63,7 +68,7 @@ h6 {
   font-size: 3rem;
   background-color: var(--primary);
   color: var(--tertiary);
-  padding: 10px 20px;
+  padding: 0 20px;
   display: inline-block;
   border-radius: var(--border-radius);
   box-shadow: 6px 5px var(--tertiary);
