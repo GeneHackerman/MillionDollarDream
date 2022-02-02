@@ -4,11 +4,13 @@ Project URL:
 
 GitHub repository URL:
 
+  https://github.com/GeneHackerman/MillionDollarDream/blob/main/README.md
+
 https://github.com/
 
 Project name:
 
-Million Dollar Dream
+  Million Dollar Dream
 
 Project type:
 
@@ -16,7 +18,7 @@ Project type:
 
 Programming languages used:
 
-HTML, CSS and Javascript
+  HTML, CSS and Javascript
 
 Project duration (total):
 
