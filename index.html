@@ -33,8 +33,8 @@
         <h3 class="card-header text-uppercase">Search By Stock or Crypto Currency</h3>
         <form id="user-form" class="card-body">
           <label class="form-label" for="username">Stock/Crypto Name</label>
-          <input name="username" id="username" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="btn">CHASE THE BAG</button>
+          <input name="search" placeholder="Bitcoin" id="search" type="text" autofocus="true" class="form-input" />
+          <button type="submit" class="search-btn">CHASE THE BAG</button>
         </form>
       </div>
       <div class="card">
@@ -58,15 +58,17 @@
       <div class="col-2">
           <div class="card">
               <div class="card-body">
-                  <h5 class="search">Stock/Crypto</h5>              
-                  <p class="symbol">Symbol </p>
-                  <p class="price">Price </p>
-                  <p class="market-cap"></p>
-                  <p class="volume"></p>
+                  <h5 class="search">Stock/Crypto: </h5>              
+                  <p class="symbol">Symbol: </p>
+                  <p class="price">Price: </p>
+                  <p class="percent">Percent Change: </p>
+                  <!-- This van be optional, its not in the stock api -->
+                  <p class="market-cap"> Market Cap: </p>
+                  <p class="volume"> Volume: </p>
               </div>
           </div>
       </div>
   </div>
 
-  <script src="assets/js/YahooFinanceAPI_script.js"></script>
+  <script src="assets/js/Stock-Crypto.js"></script>
 </body>
