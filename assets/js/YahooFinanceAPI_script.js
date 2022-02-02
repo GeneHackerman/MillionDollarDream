@@ -1,23 +1,22 @@
---------------------------- YAHOO FINANCE API ------------------------------
 
-
-//Fetch Stock data from four symbols using the yahoo finance API, jsons it into an object, then uses the object in stocklist function 
-
-
-// NOTE: V1 NOT WORKING ----- USE V2  || 
-
-fetch(“https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/2020-10-14?adjusted=true&apiKey=mNgHEk6aL2MGcLCcUpq470Xhd4l8FCJK")
-.then(function(response){
-    return response.jason();
+// Fetch Simple Data 
+var getStockData  = ()=> {
+    var myKey="T2UJTKZI47JLWJ0G"
+    var stock = "AAPL";
+    var stockLink = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=${myKey}`;
     
+    fetch(stockLink).then(async function(response) {
+       if (response.ok) {
+           const data = await response.json();
+        //    console.log(data);
+            console.log(data)
+        } else {
+            alert('Error: Search not found');
+        };
+     });
+};
+getStockData()
 
-    
-))
-
-
-
-const data = await yahooStockPrices.getCurrentData('AAPL');
-console.log(data); // { currency: 'USD', price: 132.05 }
 
 
 
