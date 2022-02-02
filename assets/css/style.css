@@ -92,6 +92,11 @@ h6 {
   padding: 2.5%;
 }
 
+.col-2 {
+  padding: 10px;
+  margin: 10px 550px auto 650px;
+  display: flex;
+}
 
 /* form */
 .form-label,
@@ -114,3 +119,9 @@ h6 {
   border-radius: var(--border-radius);
 }
 
+.subtitle {
+  width: 150%;
+  margin-left: 690px;
+  margin-top: -475px;
+  font-size: 40px;
+}
