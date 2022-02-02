@@ -4,10 +4,7 @@ Project URL:
 
 GitHub repository URL:
 
-  https://github.com/GeneHackerman/MillionDollarDream/blob/main/README.md
-
-https://github.com/
-
+  https://github.com/GeneHackerman/MillionDollarDream/blob/main
 Project name:
 
   Million Dollar Dream
