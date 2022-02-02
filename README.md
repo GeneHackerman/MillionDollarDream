@@ -4,7 +4,7 @@ Project URL:
 
 GitHub repository URL:
 
-  https://github.com/GeneHackerman/MillionDollarDream/blob/main
+   https://github.com/GeneHackerman/MillionDollarDream/blob/main
 
 
 Project name:
@@ -17,7 +17,7 @@ Project type:
 
 Programming languages used:
 
-  HTML, CSS and Javascript
+   HTML, CSS and Javascript
 
 Project duration (total):
 
