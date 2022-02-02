@@ -37,28 +37,31 @@
           <button type="submit" class="search-btn">CHASE THE BAG</button>
         </form>
       </div>
+      
       <div class="card">
-        <h3 class="card-header text-uppercase">Filter by Search</h3>
-        <div class="card-body" id="language-buttons">
-          <button class="btn" data-language="crypto">Crypto Currency</button>
-          <button class="btn" data-language="stocks">Stock Exchange</button>
-        </div>
+        <h3 class="card-header text-uppercase">History</h3>
+        <ul class="list-group list-group-flush" id="search-history-list">
+          <!-- <li class="list-group-item"></li> -->
+
+      </ul>
+      <button id="clear-history" class="btn btn-sm btn-secondary hide">Clear History</button>
       </div>
     </div>
+    
 
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8 justify-space-between">
       <h2 class="subtitle">Showing Crypto Values For: <span id="repo-search-term"></span></h2>
       <div id="repos-container" class="list-group"></div>
     </div>
     
   </main>
      
-  <!-- 5 day forecast stats -->
+  <!-- crypto/stock stats -->
      <div id="crypto">
       <div class="col-2">
-          <div class="card">
+          <div class="card flex-row">
               <div class="card-body">
-                  <h5 class="search">Stock/Crypto: </h5>              
+                  <h5 class="search">Crypto: </h5>              
                   <p class="symbol">Symbol: </p>
                   <p class="price">Price: </p>
                   <p class="percent">Percent Change: </p>
@@ -69,6 +72,8 @@
           </div>
       </div>
   </div>
+
+  
 
   <script src="assets/js/Stock-Crypto.js"></script>
 </body>

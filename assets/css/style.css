@@ -62,6 +62,7 @@ h6 {
   margin: 0;
   color: var(--tertiary);
   line-height: 1.25;
+  font-size: 30px;
 }
 
 .app-title {
@@ -94,7 +95,7 @@ h6 {
 
 .col-2 {
   padding: 10px;
-  margin: 10px 550px auto 650px;
+  margin: 10px 600px auto 650px;
   display: flex;
 }
 
@@ -121,7 +122,18 @@ h6 {
 
 .subtitle {
   width: 150%;
-  margin-left: 690px;
-  margin-top: -475px;
-  font-size: 40px;
+  margin-left: 550px;
+  margin-top: -360px;
+  font-size: 30px;
+  display: flex;
+}
+
+/* clear history button */
+.hide {
+  display: none;
+}
+
+.city-btn:hover {
+  background-color: #f6f5f5;
+  cursor: pointer;
 }
