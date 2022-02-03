@@ -4,7 +4,7 @@ Project URL:
 
 GitHub repository URL:
 
-   https://github.com/GeneHackerman/MillionDollarDream/blob/main
+   https://github.com/GeneHackerman/MillionDollarDream
 
 
 Project name:
