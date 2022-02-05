@@ -137,3 +137,45 @@ h6 {
   background-color: #f6f5f5;
   cursor: pointer;
 }
+
+
+/* smaller desktop screens and smaller */
+@media only screen and (max-width: 980px) {
+  header {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+  }
+
+  .subtitle {
+    margin: 0 40px 60px auto;
+    text-align: center;
+  }  
+
+  .col-2 {
+    padding: 0 60px -60px 0;
+    margin: 20px;
+    margin-top: -50px;
+  }
+
+}
+
+/* Medium devices (landscape tablets and smaller) */
+@media only screen and (max-width: 768px) {
+  .hero {
+    text-align: left;
+  }
+}
+
+/* Media Query FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+  .img {
+    justify-content: center;
+  }
+  
+  .card-body {
+    padding-right: 100px;
+  }
+  
+}
+
