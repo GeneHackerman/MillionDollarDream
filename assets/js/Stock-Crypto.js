@@ -67,7 +67,7 @@ var searchHandlerStock = (event)=> {
     var searchVal = search.value.trim().toUpperCase();
     
     event.preventDefault();
-    console.log(event)
+    // console.log(event)
     // clear form values 
     clearStockForm();
     // Make sure there is a search Value
@@ -82,10 +82,9 @@ var searchHandlerStock = (event)=> {
 }
 
 var pastStockSearchHandler = (event)=> {
-    console.log(event);
+    // console.log(event);
     event.stopPropagation();
     var stock = event.target.firstChild.data;
-    console.log(stock);
     clearStockForm();
     if (stock) {
         getStockData(stock);
@@ -94,10 +93,9 @@ var pastStockSearchHandler = (event)=> {
 }
 
 var pastCryptoSearchHandler = (event)=> {
-    console.log(event);
+    // console.log(event);
     event.stopPropagation();
     var crypto = event.target.firstChild.data;
-    console.log(crypto);
     clearCryptoForm();
     if (crypto) {
         getCryptoData(crypto);
@@ -266,6 +264,63 @@ function getStockData(input) {
     })
 };
 
+// News Elements 
+
+// Display Stock News 
+function displayNews(news) {
+    console.log(news)
+
+    function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = `${month}/${date}/${year}`;
+        return time;
+    }
+    for (let i = 0; i < 5; i++) {
+        // Containers
+        var cardContainerEl = document.querySelector("#card-container");
+        var cardEl = document.createElement("div");
+        var cardBodyEl = document.createElement("div");
+        cardEl.classList= "card flex-row";
+        cardBodyEl.setAttribute("class", "card-body");
+
+        // Date 
+        var dateEl = document.createElement("h5");
+        var unixdate = news[i].datetime;
+        var date = timeConverter(unixdate);
+        dateEl.textContent = date;
+
+        // Headline
+        var headlineEl = document.createElement("h6");
+        var headline = news[i].headline;
+        headlineEl.textContent = headline;
+        
+        // Image
+        var imageEl = document.createElement("img");
+        var image = news[i].image
+        imageEl.setAttribute("height", "150");
+        imageEl.setAttribute("width", "200");
+        imageEl.setAttribute("src", image);
+    
+        // Link to article
+        var linkEl = document.createElement("a");
+        var link = news[i].url;
+        linkEl.setAttribute("target", "_blank");
+        linkEl.setAttribute("href", link);
+        linkEl.appendChild(imageEl);
+
+        // Append to document. 
+        cardBodyEl.appendChild(dateEl);
+        cardBodyEl.appendChild(headlineEl);
+        cardBodyEl.appendChild(linkEl);
+        cardEl.appendChild(cardBodyEl);
+        cardContainerEl.appendChild(cardEl);
+    }  
+}
+
 // Get the trending stock news 
 function stockNews() {
     var myKey = "c7t7lsqad3i8dq4tsmb0"
@@ -274,7 +329,8 @@ function stockNews() {
     fetch(site).then(async function(response) {
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
+            displayNews(data)
         } else {
             alert('Error: Search not found.')
         };
@@ -283,6 +339,8 @@ function stockNews() {
         console.log("Unable to connect to database")
     })
 }
+stockNews();
+
 var stockSearchArr = [];
 var stockListEl = document.querySelector(".stock-history");
 
