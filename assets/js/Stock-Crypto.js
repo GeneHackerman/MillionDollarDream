@@ -21,13 +21,19 @@ var stockHighEl = document.querySelector(".high");
 var stockLowEl = document.querySelector(".low");
 
 
+var clearStockForm = ()=> {
+    stockHighEl.textContent = "";
+    stockLowEl.textContent = "";
+    stockPercentEl.textContent = "";
+    stockPriceEl.textContent = "";
 
+    // Hide other form, Display current form 
+    cryptoFormEl.setAttribute("class", "hide");
+    stockFormEl.removeAttribute("class", "hide");
+    
+}
 
-var searchHandlerCrypto = (event)=> {
- // console.log(event);
-    var searchVal = search.value.trim();
-    event.preventDefault();
-    // clear form 
+var clearCryptoForm = ()=> {
     searchNameEl.textContent = "";
     symbolEl.textContent = "";
     percentEl.textContent = "";
@@ -39,9 +45,18 @@ var searchHandlerCrypto = (event)=> {
     stockFormEl.setAttribute("class", "hide");
     cryptoFormEl.removeAttribute("class", "hide");
 
+}
+
+var searchHandlerCrypto = (event)=> {
+ // console.log(event);
+    var searchVal = search.value.trim();
+    event.preventDefault();
+    // clear form 
+    clearCryptoForm();
     // Make sure there is a search value
     if (searchVal) {
         getCryptoData(searchVal);
+        saveCryptoSearch(searchVal)
     } else {
         alert('Enter a stock or crypto to search');
     }
@@ -50,26 +65,44 @@ var searchHandlerCrypto = (event)=> {
 
 var searchHandlerStock = (event)=> {
     var searchVal = search.value.trim().toUpperCase();
+    
     event.preventDefault();
     console.log(event)
     // clear form values 
-    stockHighEl.textContent = "";
-    stockLowEl.textContent = "";
-    stockPercentEl.textContent = "";
-    stockPriceEl.textContent = "";
-
-    // Hide other form, Display current form 
-    cryptoFormEl.setAttribute("class", "hide");
-    stockFormEl.removeAttribute("class", "hide");
-    
+    clearStockForm();
     // Make sure there is a search Value
     if (searchVal) {
         getStockData(searchVal);
+        saveStockSearch(searchVal);
     } else {
         alert('Enter a stock or crypto to search');
     }
-    console.log(stockFormEl)
+    // console.log(stockFormEl)
     
+}
+
+var pastStockSearchHandler = (event)=> {
+    console.log(event);
+    event.stopPropagation();
+    var stock = event.target.firstChild.data;
+    console.log(stock);
+    clearStockForm();
+    if (stock) {
+        getStockData(stock);
+    }
+  
+}
+
+var pastCryptoSearchHandler = (event)=> {
+    console.log(event);
+    event.stopPropagation();
+    var crypto = event.target.firstChild.data;
+    console.log(crypto);
+    clearCryptoForm();
+    if (crypto) {
+        getCryptoData(crypto);
+    }
+   
 }
 
 function displayCoinData(cryptoData){
@@ -112,11 +145,6 @@ function displayDetailedData(cryptoData) {
     var marketCap = cryptoData.market_data.market_cap.usd.toLocaleString();
     // console.log(`Market Cap: ${marketCap} usd`);
     marketCapEl.textContent = ` Market Cap: ${marketCap} usd`;
-
-
-    if (coinName) {
-        saveCryptoSearch(coinName)
-    }
 
 };
 
@@ -177,7 +205,8 @@ function detailedData(coin) {
 
 // Fetch Simple Data 
 function getCryptoData(coin) {
-    var cryptoLink = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}%2C%20ether&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+    var lowercase = coin.toLowerCase();
+    var cryptoLink = `https://api.coingecko.com/api/v3/simple/price?ids=${lowercase}%2C%20ether&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
     
     fetch(cryptoLink).then(async function(response) {
        if (response.ok) {
@@ -214,11 +243,6 @@ function displayStockData(stockData) {
     stockHighEl.textContent = `Today's High: ${high}`
    stockLowEl.textContent = `Today's Low: ${low}`
     var searchVal = search.value.trim().toUpperCase()
-    stockSearchEl.textContent = searchVal
-
-    if (!price == 0) {
-        saveStockSearch(searchVal)
-    }
 }
 
 function getStockData(input) {
@@ -230,7 +254,9 @@ function getStockData(input) {
             const data = await response.json();
             console.log(data);
             displayStockData(data);
-            
+            stockSearchEl.textContent = ""
+            stockSearchEl.textContent = input
+    
         } else {
             alert('Error: Search not found.')
         };
@@ -305,7 +331,7 @@ var getStockSearch = ()=> {
         var stockEl = document.createElement("button")
         stockEl.classList = "save-search btn";
         stockEl.setAttribute("type", "submit");
-        stockEl.setAttribute("data-stock", savedStock[i]);
+        stockEl.setAttribute("data-stocks", savedStock[i]);
         var text = savedStock[i]
         stockEl.textContent = `${text}`;
         stockListEl.appendChild(stockEl)
@@ -334,6 +360,8 @@ getStockSearch();
 
 cryptoBtnEl.addEventListener("click", searchHandlerCrypto);
 stockBtnEl.addEventListener("click", searchHandlerStock);
+cryptoListEl.addEventListener("click", pastCryptoSearchHandler);
+stockListEl.addEventListener("click", pastStockSearchHandler);
 clearHistoryBtn.addEventListener("click", function(){
     // console.log(listCityEl.childNodes)
     var crypto = cryptoListEl.lastElementChild;
@@ -350,4 +378,5 @@ clearHistoryBtn.addEventListener("click", function(){
         stockListEl.removeChild(stock);
         stock = stockListEl.lastElementChild;
     }
+    localStorage.removeItem("stocks");
 })
