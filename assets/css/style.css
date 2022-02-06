@@ -143,7 +143,7 @@ h6 {
 @media only screen and (max-width: 980px) {
   header {
     text-align: left;
-    width: 100%;
+    min-width: 100%;
     margin: auto;
   }
 
@@ -158,6 +158,11 @@ h6 {
     margin-top: -50px;
   }
 
+  main {
+    margin: 10px 5px 10px 20px;
+    padding-bottom: 0 30px 40px;
+  }
+
 }
 
 /* Medium devices (landscape tablets and smaller) */
@@ -170,12 +175,21 @@ h6 {
 /* Media Query FOR MOBILE PHONES AND SMALLER */
 @media screen and (max-width: 575px) {
   .img {
-    justify-content: center;
+    padding-left: 100px;
+  }
+
+  .card {
+    padding-right: 40px;
   }
   
   .card-body {
-    padding-right: 100px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
-  
+
+  .col-12 {
+    display:inline-block;
+  }
 }
+
 
