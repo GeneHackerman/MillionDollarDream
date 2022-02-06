@@ -33,47 +33,138 @@
         <h3 class="card-header text-uppercase">Search By Stock or Crypto Currency</h3>
         <form id="user-form" class="card-body">
           <label class="form-label" for="username">Stock/Crypto Name</label>
-          <input name="search" placeholder="Bitcoin" id="search" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="search-btn">CHASE THE BAG</button>
+          <input name="search" placeholder="Bitcoin, AAPL" id="search" type="text" autofocus="true" class="form-input" />
+          <button type="submit" class="btn crypto-btn">CHASE THE COINS</button>
+          <button type="submit" class="btn stock-btn">CHASE THE STOCKS</button>
+
         </form>
       </div>
       
       <div class="card">
         <h3 class="card-header text-uppercase">History</h3>
         <ul class="list-group list-group-flush" id="search-history-list">
-          <!-- <li class="list-group-item"></li> -->
+          <li class="list-group-item">
+          </li>
 
-      </ul>
-      <button id="clear-history" class="btn btn-sm btn-secondary hide">Clear History</button>
+        </ul>
+      <button id="clear-history" class="btn btn-sm btn-secondary">Clear History</button>
       </div>
     </div>
     
 
     <div class="col-12 col-md-8 justify-space-between">
-      <h2 class="subtitle">Showing Crypto Values For: <span id="repo-search-term"></span></h2>
+      <h2 class="subtitle">Whats in the Bag? <span id="repo-search-term"></span></h2>
       <div id="repos-container" class="list-group"></div>
     </div>
     
   </main>
      
   <!-- crypto/stock stats -->
-     <div id="crypto">
+     <div class="hide" id="crypto">
       <div class="col-2">
-          <div class="card flex-row">
-              <div class="card-body">
-                  <h5 class="search">Crypto: </h5>              
-                  <p class="symbol">Symbol: </p>
-                  <p class="price">Price: </p>
-                  <p class="percent">Percent Change: </p>
-                  <!-- This van be optional, its not in the stock api -->
-                  <p class="market-cap"> Market Cap: </p>
-                  <p class="volume"> Volume: </p>
-              </div>
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5 class="search"></h5>              
+            <p class="symbol"></p>
+            <p class="price"></p>
+            <p class="percent"> </p>
+            <p class="market-cap"></p>
+            <p class="volume"></p>
           </div>
+        </div>
       </div>
-  </div>
+    </div>
+    <div class="hide" id="stocks">
+      <div class="col-2">
+        <div class="card flex-row">
+          <div class="card-body">
+             <!-- Stock Calls  -->
+            <h5 class="stock-search">yp</h5>
+            <p class="stock-price">yo</p>
+            <p class="stock-percent">yo</p>
+            <p class="high">yo</p>
+            <p class="low">yo</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  
+    <div class="trending">
+     
+      <div class="col-2">
+        <h5 class="trending-coins">Buy These Coins:</h5>
+        <div class="card flex-row">
+         <div class="card-body">
+          <p> hello testing</p>
 
+         </div>
+        </div>
+        <div class="card flex-row">
+          <div class="card-body">
+           <p> hello testing</p>
+ 
+          </div>
+         </div>
+         <div class="card flex-row">
+          <div class="card-body">
+           <p> hello testing</p>
+ 
+          </div>
+         </div>
+         <div class="card flex-row">
+          <div class="card-body">
+           <p> hello testing</p>
+ 
+          </div>
+         </div>
+         <div class="card flex-row">
+          <div class="card-body">
+           <p> hello testing</p>
+ 
+          </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="news"> 
+      <div class="col-2">
+        <h5>Read This News:</h5>
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5>hello </h5>
+            <p>testing</p>
+          </div>   
+        </div>
+
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5>hello </h5>
+            <p>testing</p>
+          </div>   
+        </div>
+
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5>hello </h5>
+            <p>testing</p>
+          </div>   
+        </div>
+
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5>hello </h5>
+            <p>testing</p>
+          </div>   
+        </div>
+
+
+        <div class="card flex-row">
+          <div class="card-body">
+            <h5>hello </h5>
+            <p>testing</p>
+          </div>   
+        </div>
+      </div>
+    </div>
   <script src="assets/js/Stock-Crypto.js"></script>
 </body>
