@@ -1,153 +1,191 @@
 var search = document.querySelector("#search");
-var searchNameEl = document.querySelector(".search")
-var searchBtnEl = document.querySelector(".search-btn");
+var cryptoBtnEl = document.querySelector(".crypto-btn");
+var stockBtnEl = document.querySelector(".stock-btn");
+var clearHistoryBtn = document.querySelector("#clear-history");
+
+// Crypto Elements 
+var cryptoFormEl = document.querySelector("#crypto");
+var searchNameEl = document.querySelector(".search");
 var symbolEl = document.querySelector(".symbol");
 var percentEl = document.querySelector(".percent");
 var marketCapEl = document.querySelector(".market-cap");
 var volumeEl = document.querySelector(".volume");
-var priceEl = document.querySelector(".price")
+var priceEl = document.querySelector(".price");
 
-// The prevent default isnt working. the page refreshes when you search
-var searchHandler = function(event) {
-    console.log(event);
-    event.preventDefault()
+// Stock Elements
+var stockFormEl = document.querySelector("#stocks");
+var stockSearchEl = document.querySelector(".stock-search");
+var stockPriceEl = document.querySelector(".stock-price");
+var stockPercentEl = document.querySelector(".stock-percent");
+var stockHighEl = document.querySelector(".high");
+var stockLowEl = document.querySelector(".low");
 
+
+var clearStockForm = ()=> {
+    stockHighEl.textContent = "";
+    stockLowEl.textContent = "";
+    stockPercentEl.textContent = "";
+    stockPriceEl.textContent = "";
+
+    // Hide other form, Display current form 
+    cryptoFormEl.setAttribute("class", "hide");
+    stockFormEl.removeAttribute("class", "hide");
+    
+}
+
+var clearCryptoForm = ()=> {
+    searchNameEl.textContent = "";
+    symbolEl.textContent = "";
+    percentEl.textContent = "";
+    marketCapEl.textContent = "";
+    volumeEl.textContent = "";
+    priceEl.textContent = "";
+    
+    // Hide other form, display form 
+    stockFormEl.setAttribute("class", "hide");
+    cryptoFormEl.removeAttribute("class", "hide");
+
+}
+
+var searchHandlerCrypto = (event)=> {
+ // console.log(event);
     var searchVal = search.value.trim();
-
+    event.preventDefault();
+    // clear form 
+    clearCryptoForm();
+    // Make sure there is a search value
     if (searchVal) {
         getCryptoData(searchVal);
-        detailedData(searchVal)
+        saveCryptoSearch(searchVal)
     } else {
-        alert("Searh vlaue is void");
+        alert('Enter a stock or crypto to search');
     }
-
-};
-
-
-var displayCoinData = (cryptoData)=>{
-    console.log(cryptoData);
-    var searchTerm = cryptoData[Object.keys(cryptoData)]
     
-    // Last updated 
-        // var timestamp = searchTerm.last_updated_at; 
-        // console.log(timestamp);
-        // var date = new Date(timestamp * 1000);
-        // console.log(`Last Updated: ${date.getMonth()+1}/${(date.getDate())}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
+}
 
-    // Get Price 
-    var price = `${searchTerm.usd} usd`;
+var searchHandlerStock = (event)=> {
+    var searchVal = search.value.trim().toUpperCase();
+    
+    event.preventDefault();
+    console.log(event)
+    // clear form values 
+    clearStockForm();
+    // Make sure there is a search Value
+    if (searchVal) {
+        getStockData(searchVal);
+        saveStockSearch(searchVal);
+    } else {
+        alert('Enter a stock or crypto to search');
+    }
+    // console.log(stockFormEl)
+    
+}
+
+var pastStockSearchHandler = (event)=> {
+    console.log(event);
+    event.stopPropagation();
+    var stock = event.target.firstChild.data;
+    console.log(stock);
+    clearStockForm();
+    if (stock) {
+        getStockData(stock);
+    }
+  
+}
+
+var pastCryptoSearchHandler = (event)=> {
+    console.log(event);
+    event.stopPropagation();
+    var crypto = event.target.firstChild.data;
+    console.log(crypto);
+    clearCryptoForm();
+    if (crypto) {
+        getCryptoData(crypto);
+    }
+   
+}
+
+function displayCoinData(cryptoData){
+    // console.log(cryptoData);
+    var searchTerm = cryptoData[Object.keys(cryptoData)]
+
+        // Get Price 
+    var amount = searchTerm.usd.toLocaleString()
+    var price = `Price: ${amount} usd`;
     priceEl.textContent += price ;
-
-    // Get 24-hr Change 
+    
+        // Get 24-hr Change 
     var percentChange = searchTerm.usd_24h_change;
     var roundPercent = percentChange.toString().slice(0,5);
     // console.log(`Percent Change: ${roundPercent}%`);
-    percentEl.textContent += `${roundPercent}%`
-
-    // Get 24-hr market cap 
-    var marketCap = searchTerm.usd_market_cap;
-    // console.log(`24Hr Market Cap: ${marketCap.toLocaleString()}`);
-    
+    percentEl.textContent += `Percent Change: ${roundPercent}%`
 
     // Get 24hr Volume 
     var volume = searchTerm.usd_24h_vol;
     var volumeEdited = volume.toLocaleString()
     // console.log(`24Hr Volume: ${volume.toLocaleString()}`)
-    volumeEl.textContent += `${volumeEdited} usd`
+    volumeEl.textContent += `Volume: ${volumeEdited} usd`
+
+
 };
 
-var displayDetailedData = (cryptoData)=> {
+function displayDetailedData(cryptoData) {
     console.log(cryptoData);
 
             // Get symbol 
     var symbol = cryptoData.symbol.toUpperCase();
     // console.log(`Symbol: ${symbol}`);
-    symbolEl.textContent += symbol
+    symbolEl.textContent += `Symbol: ${symbol}`
 
-             // Get Name 
+            // Get Name 
     var coinName = cryptoData.name
     searchNameEl.textContent = coinName
 
-    // // Get Rank 
-    // var rank = cryptoData.market_cap_rank;
-    // console.log(`Market Cap Rank: ${rank}`);
-
-    // // Get Image (large, small, thumb)
-    // var image = cryptoData.image.thumb;
-    // console.log(image);
-
-    // // Get Website 
-    // var site = cryptoData.links.homepage[0];
-    // console.log(site);
-
-    // // Get All time Highs 
-    // var allTimeHigh = cryptoData.market_data.ath.usd.toLocaleString();
-    // console.log(`All Time High: ${allTimeHigh} usd`)
-    // // Get All Time Low
-    // var allTimeLow = cryptoData.market_data.atl.usd.toLocaleString();
-    // console.log(`All Time Low: ${allTimeLow} usd`);
-    // // Get All Time Change Percent
-    // var allPercentChange = cryptoData.market_data.atl_change_percentage.usd.toLocaleString();
-    // console.log(`Total Percent Change: ${allPercentChange}%`);
-    // // Get Current Price 
-    // var price = cryptoData.market_data.current_price.usd.toLocaleString();
-    // console.log(`Current Price: ${price} usd`);
-    // // 24Hr High 
-    // var dayHigh = cryptoData.market_data.high_24h.usd.toLocaleString();
-    // console.log(`24hr High: ${dayHigh} usd`)
-    // // 24hr Low 
-    // var dayLow = cryptoData.market_data.low_24h.usd.toLocaleString();
-    // console.log(`24hr Low: ${dayLow} usd`);
-
-
-            // Market Cap 
+            // Market Cap
     var marketCap = cryptoData.market_data.market_cap.usd.toLocaleString();
-    console.log(`Market Cap: ${marketCap} usd`);
-    marketCapEl.textContent += `${marketCap} usd`;
-
-    // // 24hr percent change
-    // var dayPercentChange = cryptoData.market_data.price_change_24h;
-    // console.log(`24hr Percent Change: ${dayPercentChange}%`)
-    // // Coins in circulation 
-    // var totalSupply = cryptoData.market_data.total_supply.toLocaleString();
-    // console.log(`Total Supply: ${totalSupply}`)
+    // console.log(`Market Cap: ${marketCap} usd`);
+    marketCapEl.textContent = ` Market Cap: ${marketCap} usd`;
 
 };
 
-// var displayTrending = (trending)=> {
-//     console.log(trending)
-//     var list = trending.coins
-//     for (let i = 0; i < list.length; i++) {
-//         // Get Coin from list
-//         console.log(`${i+1}: ${list[i].item.name}`);
-//         // Get Market Cap Rank
-//         console.log(`Market Cap Rank: ${list[i].item.market_cap_rank}`);
-//         // Price BTC 
-//         console.log(`Price in Bitcoin: ${list[i].item.price_btc}`);
-//         // symbol
-//         console.log(`Symbol: ${list[i].item.symbol}`);
-//         // image (thumb, small, large,)
-//         console.log(list[i].item.thumb);
-//     }
-// }
+function displayTrending(trending) {
+    console.log(trending)
+    var list = trending.coins
+    for (let i = 0; i < list.length; i++) {
+        // Get Coin from list
+        console.log(`${i+1}: ${list[i].item.name}`);
+        // Get Market Cap Rank
+        console.log(`Market Cap Rank: ${list[i].item.market_cap_rank}`);
+        // Price BTC 
+        console.log(`Price in Bitcoin: ${list[i].item.price_btc}`);
+        // symbol
+        console.log(`Symbol: ${list[i].item.symbol}`);
+        // image (thumb, small, large,)
+        console.log(list[i].item.thumb);
+    }
+}
 
 // Fetch Trending Coins 
-// var trendingCoins = ()=> {
-//     var cryptoLink = 'https://api.coingecko.com/api/v3/search/trending';
-//     fetch(cryptoLink).then(async function(response) {
-//         if (response.ok) {
-//             const data = await response.json();
-//             // console.log(data);
-//             displayTrending(data);
-//          } else {
-//              alert('Error: Cryptocurrency not found');
-//          }
-//       });
-// };
+function trendingCoins() {
+    var cryptoLink = 'https://api.coingecko.com/api/v3/search/trending';
+    fetch(cryptoLink).then(async function(response) {
+        if (response.ok) {
+            const data = await response.json();
+            // console.log(data);
+            displayTrending(data);
+         } else {
+             alert('Error: Cryptocurrency not found');
+         }
+    }).catch(function(error){
+        console.log(error);
+        console.log("Unable to connect to database")
+    })
+    
+};
 // trendingCoins()
 
 // Fetch Detailed Market Data 
-var detailedData = (coin)=> {
+function detailedData(coin) {
     var cryptoLink = `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&developer_data=false&sparkline=false`
 
     fetch(cryptoLink).then(async function(response) {
@@ -156,56 +194,189 @@ var detailedData = (coin)=> {
             // console.log(data);
             displayDetailedData(data);
          } else {
-             alert('Error: Cryptocurrency not found');
+             alert('Error: Search not found')
          };
-      });
+    }).catch(function(error){
+        console.log(error);
+        console.log("Unable to connect to database")
+    })
 };
 // detailedData()
 
 // Fetch Simple Data 
-var getCryptoData = (coin)=> {
-    var cryptoLink = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}%2C%20ether&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
+function getCryptoData(coin) {
+    var lowercase = coin.toLowerCase();
+    var cryptoLink = `https://api.coingecko.com/api/v3/simple/price?ids=${lowercase}%2C%20ether&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
     
     fetch(cryptoLink).then(async function(response) {
        if (response.ok) {
            const data = await response.json();
         //    console.log(data);
            displayCoinData(data);
+           detailedData(coin);
+
         } else {
-            alert('Error: Cryptocurrency not found');
+            alert('Error: Search not found.')
         };
-     });
+     }).catch(function(error){
+        console.log(error);
+        console.log("Unable to connect to database")
+    })
+    // detailedData(coin)
 };
 
+// Finhib API Search by stock symbol
+function displayStockData(stockData) {
+    // console.log(stockData);
+    // My price value 
+    var price = stockData.c
+    stockPriceEl.textContent = `Price: ${price}`
 
-// This needs to be the search input
-var searchTerm = "AAPL"
-// Fetch Simple Data 
-var getStockData  = (stock)=> {
-        var myKey="T2UJTKZI47JLWJ0G"
-        var stockLink = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stock}&apikey=${myKey}`;
+   
+    // My percent Change 
+    var percentChange = stockData.dp;
+    // console.log(`Price ${price} Percent: ${percentChange}`)
+    stockPercentEl.textContent = `Percent Change: ${percentChange}%`
+
+    var high = stockData.h
+    var low = stockData.l
+    stockHighEl.textContent = `Today's High: ${high}`
+   stockLowEl.textContent = `Today's Low: ${low}`
+    var searchVal = search.value.trim().toUpperCase()
+}
+
+function getStockData(input) {
     
-        fetch(stockLink).then(async function(response) {
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data)
-             } else {
-                 alert('Error: Search not found');
-             };
-          }); 
+    var myKey = "c7t7lsqad3i8dq4tsmb0"
+    var site = `https://finnhub.io/api/v1/quote?symbol=${input}&token=${myKey}`
+    fetch(site).then(async function(response) {
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            displayStockData(data);
+            stockSearchEl.textContent = ""
+            stockSearchEl.textContent = input
+    
+        } else {
+            alert('Error: Search not found.')
+        };
+    }).catch(function(error){
+        console.log(error);
+        console.log("Unable to connect to database")
+    })
 };
 
-// getStockData(searchTerm);
+// Get the trending stock news 
+function stockNews() {
+    var myKey = "c7t7lsqad3i8dq4tsmb0"
+    var site = `https://finnhub.io/api/v1/news?category=general&token=${myKey}`;
 
+    fetch(site).then(async function(response) {
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+        } else {
+            alert('Error: Search not found.')
+        };
+    }).catch(function(error){
+        console.log(error);
+        console.log("Unable to connect to database")
+    })
+}
+var stockSearchArr = [];
+var stockListEl = document.querySelector(".stock-history");
 
-// .catch(function(error){
-//     console.log(error)
-//     alert("Unable to connect to database")
-// });
+// Save searches to Local Storage. 
+var saveStockSearch = (search)=> {
+    //Create Button 
+    stockEl = document.createElement("button");
+    stockEl.textContent = search;
+    stockEl.classList = ("save-search btn");
+    stockEl.setAttribute = ("type", "submit");
+    stockEl.setAttribute = ("data-stocks", search);
+    //Append to the List 
+    stockListEl.appendChild(stockEl);
+    
+    if (!stockSearchArr.includes(search)) {
+        stockSearchArr.push(search);
+    }
+    JSON.parse(localStorage.setItem("stocks", JSON.stringify(stockSearchArr)));
+}
 
+var cryptoSearchArr = [];
+var cryptoListEl = document.querySelector(".crypto-history");
 
-searchBtnEl.addEventListener("click", searchHandler);
+// Save searches to Local Storage. 
+var saveCryptoSearch = (search)=> {
+    //Create Button 
+    cryptoEl = document.createElement("button");
+    cryptoEl.textContent = search;
+    cryptoEl.classList = ("save-search btn");
+    cryptoEl.setAttribute = ("type", "submit");
+    cryptoEl.setAttribute = ("data-crypto", search);
+    //Append to the List 
+    cryptoListEl.appendChild(cryptoEl);
+    
+    if (!cryptoSearchArr.includes(search)) {
+        cryptoSearchArr.push(search);
+    }
+    JSON.parse(localStorage.setItem("crypto", JSON.stringify(cryptoSearchArr)))
+}
 
+var getStockSearch = ()=> {
+    // load the data or start a new array if there is no data 
+    var savedStock = JSON.parse(localStorage.getItem("stocks")) ?? [];
+    // Append Data to list 
+    for (let i  = 0; savedStock.length; i++) {
+        var stockEl = document.createElement("button")
+        stockEl.classList = "save-search btn";
+        stockEl.setAttribute("type", "submit");
+        stockEl.setAttribute("data-stocks", savedStock[i]);
+        var text = savedStock[i]
+        stockEl.textContent = `${text}`;
+        stockListEl.appendChild(stockEl)
+    }
 
+}
 
+var getCryptoSearch = ()=> {
+    // load the data or start a new array if there is no data 
+    var savedCrypto = JSON.parse(localStorage.getItem("crypto")) ?? [];
+    // append data to list 
+    for (let i  = 0; savedCrypto.length; i++) {
+        var cryptoEl = document.createElement("button")
+        cryptoEl.classList = "save-search btn";
+        cryptoEl.setAttribute("type", "submit");
+        cryptoEl.setAttribute("data-crypto", savedCrypto[i]);
+        var text = savedCrypto[i]
+        cryptoEl.textContent = `${text}`;
+        cryptoListEl.appendChild(cryptoEl)
+    }
 
+}
+
+getCryptoSearch();
+getStockSearch();
+
+cryptoBtnEl.addEventListener("click", searchHandlerCrypto);
+stockBtnEl.addEventListener("click", searchHandlerStock);
+cryptoListEl.addEventListener("click", pastCryptoSearchHandler);
+stockListEl.addEventListener("click", pastStockSearchHandler);
+clearHistoryBtn.addEventListener("click", function(){
+    // console.log(listCityEl.childNodes)
+    var crypto = cryptoListEl.lastElementChild;
+
+    // Remove last element. Select next element to remove
+    while (crypto) {
+        cryptoListEl.removeChild(crypto);
+        crypto = cryptoListEl.lastElementChild;
+    
+    localStorage.removeItem("crypto");
+    }
+    var stock = stockListEl.lastElementChild;
+    while (stock) {
+        stockListEl.removeChild(stock);
+        stock = stockListEl.lastElementChild;
+    }
+    localStorage.removeItem("stocks");
+})
