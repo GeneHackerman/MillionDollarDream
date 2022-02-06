@@ -150,16 +150,39 @@ function displayTrending(trending) {
     console.log(trending)
     var list = trending.coins
     for (let i = 0; i < list.length; i++) {
+        var trendingContainerEl = document.querySelector(".trending-container");
+        var trendingCardEl = document.createElement("div");
+        trendingCardEl.classList = "card flex-row";
+
         // Get Coin from list
-        console.log(`${i+1}: ${list[i].item.name}`);
+        var coinEl = document.createElement("h5");
+        var rank = `${i+1}: ${list[i].item.name}`;
+        coinEl.textContent = rank
+
         // Get Market Cap Rank
-        console.log(`Market Cap Rank: ${list[i].item.market_cap_rank}`);
-        // Price BTC 
-        console.log(`Price in Bitcoin: ${list[i].item.price_btc}`);
-        // symbol
-        console.log(`Symbol: ${list[i].item.symbol}`);
-        // image (thumb, small, large,)
-        console.log(list[i].item.thumb);
+        var marketEl = document.createElement("p");
+        var marketCap = `Market Cap Rank: ${list[i].item.market_cap_rank}`
+        marketEl.textContent = marketCap;
+
+        // Symbol
+        var symbolEl = document.createElement("span");
+        var symbol = `${list[i].item.symbol}`;
+        symbolEl.textContent = symbol;
+
+
+        // Image (thumb, small, large,)
+        var imageEl = document.createElement("img");
+        var image = list[i].item.thumb;
+        imageEl.setAttribute("src", image);
+
+        symbolEl.appendChild(imageEl);
+
+        // append to page 
+        trendingCardEl.appendChild(coinEl);
+        trendingCardEl.appendChild(symbolEl);
+        trendingCardEl.appendChild(marketEl);
+        trendingContainerEl.appendChild(trendingCardEl);
+
     }
 }
 
@@ -180,7 +203,6 @@ function trendingCoins() {
     })
     
 };
-// trendingCoins()
 
 // Fetch Detailed Market Data 
 function detailedData(coin) {
@@ -339,7 +361,7 @@ function stockNews() {
         console.log("Unable to connect to database")
     })
 }
-stockNews();
+
 
 var stockSearchArr = [];
 var stockListEl = document.querySelector(".stock-history");
@@ -381,7 +403,7 @@ var saveCryptoSearch = (search)=> {
     JSON.parse(localStorage.setItem("crypto", JSON.stringify(cryptoSearchArr)))
 }
 
-var getStockSearch = ()=> {
+var getStockHistory = ()=> {
     // load the data or start a new array if there is no data 
     var savedStock = JSON.parse(localStorage.getItem("stocks")) ?? [];
     // Append Data to list 
@@ -397,7 +419,7 @@ var getStockSearch = ()=> {
 
 }
 
-var getCryptoSearch = ()=> {
+var getCryptoHistory = ()=> {
     // load the data or start a new array if there is no data 
     var savedCrypto = JSON.parse(localStorage.getItem("crypto")) ?? [];
     // append data to list 
@@ -413,8 +435,11 @@ var getCryptoSearch = ()=> {
 
 }
 
-getCryptoSearch();
-getStockSearch();
+getCryptoHistory();
+getStockHistory();
+stockNews();
+trendingCoins();
+
 
 cryptoBtnEl.addEventListener("click", searchHandlerCrypto);
 stockBtnEl.addEventListener("click", searchHandlerStock);
