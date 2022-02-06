@@ -34,19 +34,20 @@
         <form id="user-form" class="card-body">
           <label class="form-label" for="username">Stock/Crypto Name</label>
           <input name="search" placeholder="Bitcoin, AAPL" id="search" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="btn crypto-btn">CHASE THE COINS</button>
-          <button type="submit" class="btn stock-btn">CHASE THE STOCKS</button>
+          <button type="button" class="btn crypto-btn">CHASE THE COINS</button>
+          <button type="button" class="btn stock-btn">CHASE THE STOCKS</button>
 
         </form>
       </div>
       
       <div class="card">
-        <h3 class="card-header text-uppercase">History</h3>
-        <ul class="list-group list-group-flush" id="search-history-list">
-          <li class="list-group-item">
-          </li>
+        <h3 class="card-header text-uppercase">Crypto Serches:</h3>
+        <div class="crypto-history">
+        </div>
 
-        </ul>
+        <h3 class="card-header text-uppercase">Stock Searches:</h3> 
+        <div class="stock-history">
+        </div>
       <button id="clear-history" class="btn btn-sm btn-secondary">Clear History</button>
       </div>
     </div>

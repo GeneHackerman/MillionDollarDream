@@ -1,10 +1,11 @@
 var search = document.querySelector("#search");
 var cryptoBtnEl = document.querySelector(".crypto-btn");
-var stockBtnEl = document.querySelector(".stock-btn")
+var stockBtnEl = document.querySelector(".stock-btn");
+var clearHistoryBtn = document.querySelector("#clear-history");
 
 // Crypto Elements 
-var cryptoFormEl = document.querySelector("#crypto")
-var searchNameEl = document.querySelector(".search")
+var cryptoFormEl = document.querySelector("#crypto");
+var searchNameEl = document.querySelector(".search");
 var symbolEl = document.querySelector(".symbol");
 var percentEl = document.querySelector(".percent");
 var marketCapEl = document.querySelector(".market-cap");
@@ -19,7 +20,6 @@ var stockPercentEl = document.querySelector(".stock-percent");
 var stockHighEl = document.querySelector(".high");
 var stockLowEl = document.querySelector(".low");
 
-// Search History Elements 
 
 
 
@@ -41,10 +41,11 @@ var searchHandlerCrypto = (event)=> {
 
     // Make sure there is a search value
     if (searchVal) {
-        getCryptoData(searchVal)
+        getCryptoData(searchVal);
     } else {
         alert('Enter a stock or crypto to search');
     }
+    
 }
 
 var searchHandlerStock = (event)=> {
@@ -68,65 +69,58 @@ var searchHandlerStock = (event)=> {
         alert('Enter a stock or crypto to search');
     }
     console.log(stockFormEl)
+    
 }
 
-var displayCoinData = (cryptoData)=>{
+function displayCoinData(cryptoData){
     // console.log(cryptoData);
     var searchTerm = cryptoData[Object.keys(cryptoData)]
 
         // Get Price 
-    var price = `Price: ${searchTerm.usd.toLocaleString()} usd`;
+    var amount = searchTerm.usd.toLocaleString()
+    var price = `Price: ${amount} usd`;
     priceEl.textContent += price ;
-
+    
         // Get 24-hr Change 
     var percentChange = searchTerm.usd_24h_change;
     var roundPercent = percentChange.toString().slice(0,5);
     // console.log(`Percent Change: ${roundPercent}%`);
     percentEl.textContent += `Percent Change: ${roundPercent}%`
 
-        // Get 24-hr market cap 
-    var marketCap = searchTerm.usd_market_cap;
-    // console.log(`24Hr Market Cap: ${marketCap.toLocaleString()}`);
-    
-
     // Get 24hr Volume 
     var volume = searchTerm.usd_24h_vol;
     var volumeEdited = volume.toLocaleString()
     // console.log(`24Hr Volume: ${volume.toLocaleString()}`)
     volumeEl.textContent += `Volume: ${volumeEdited} usd`
+
+
 };
 
-var displayDetailedData = (cryptoData)=> {
-    // console.log(cryptoData);
+function displayDetailedData(cryptoData) {
+    console.log(cryptoData);
 
             // Get symbol 
     var symbol = cryptoData.symbol.toUpperCase();
     // console.log(`Symbol: ${symbol}`);
     symbolEl.textContent += `Symbol: ${symbol}`
 
-             // Get Name 
+            // Get Name 
     var coinName = cryptoData.name
     searchNameEl.textContent = coinName
 
-    // // Get Rank 
-    // var rank = cryptoData.market_cap_rank;
-    // console.log(`Market Cap Rank: ${rank}`);
-
-    // // Get Image (large, small, thumb)
-    // var image = cryptoData.image.thumb;
-    // console.log(image);
-
-    // // Get Website 
-    // var site = cryptoData.links.homepage[0];
-    // console.log(site);
-
-        // Market Cap 
+            // Market Cap
     var marketCap = cryptoData.market_data.market_cap.usd.toLocaleString();
     // console.log(`Market Cap: ${marketCap} usd`);
-    marketCapEl.textContent += ` Market Cap: ${marketCap} usd`;
+    marketCapEl.textContent = ` Market Cap: ${marketCap} usd`;
+
+
+    if (coinName) {
+        saveCryptoSearch(coinName)
+    }
+
 };
 
-var displayTrending = (trending)=> {
+function displayTrending(trending) {
     console.log(trending)
     var list = trending.coins
     for (let i = 0; i < list.length; i++) {
@@ -144,7 +138,7 @@ var displayTrending = (trending)=> {
 }
 
 // Fetch Trending Coins 
-var trendingCoins = ()=> {
+function trendingCoins() {
     var cryptoLink = 'https://api.coingecko.com/api/v3/search/trending';
     fetch(cryptoLink).then(async function(response) {
         if (response.ok) {
@@ -156,14 +150,14 @@ var trendingCoins = ()=> {
          }
     }).catch(function(error){
         console.log(error);
-        alert("Unable to connect to database")
+        console.log("Unable to connect to database")
     })
     
 };
 // trendingCoins()
 
 // Fetch Detailed Market Data 
-var detailedData = (coin)=> {
+function detailedData(coin) {
     var cryptoLink = `https://api.coingecko.com/api/v3/coins/${coin}?localization=false&tickers=false&developer_data=false&sparkline=false`
 
     fetch(cryptoLink).then(async function(response) {
@@ -176,13 +170,13 @@ var detailedData = (coin)=> {
          };
     }).catch(function(error){
         console.log(error);
-        alert("Unable to connect to database")
+        console.log("Unable to connect to database")
     })
 };
 // detailedData()
 
 // Fetch Simple Data 
-var getCryptoData = (coin)=> {
+function getCryptoData(coin) {
     var cryptoLink = `https://api.coingecko.com/api/v3/simple/price?ids=${coin}%2C%20ether&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true`;
     
     fetch(cryptoLink).then(async function(response) {
@@ -190,23 +184,26 @@ var getCryptoData = (coin)=> {
            const data = await response.json();
         //    console.log(data);
            displayCoinData(data);
-           detailedData(coin)
+           detailedData(coin);
+
         } else {
             alert('Error: Search not found.')
         };
      }).catch(function(error){
         console.log(error);
-        alert("Unable to connect to database")
+        console.log("Unable to connect to database")
     })
     // detailedData(coin)
 };
 
 // Finhib API Search by stock symbol
-var displayStockData = (stockData)=> {
+function displayStockData(stockData) {
     // console.log(stockData);
     // My price value 
     var price = stockData.c
     stockPriceEl.textContent = `Price: ${price}`
+
+   
     // My percent Change 
     var percentChange = stockData.dp;
     // console.log(`Price ${price} Percent: ${percentChange}`)
@@ -218,27 +215,33 @@ var displayStockData = (stockData)=> {
    stockLowEl.textContent = `Today's Low: ${low}`
     var searchVal = search.value.trim().toUpperCase()
     stockSearchEl.textContent = searchVal
+
+    if (!price == 0) {
+        saveStockSearch(searchVal)
+    }
 }
 
-var getStockData = (input)=> {
+function getStockData(input) {
     
     var myKey = "c7t7lsqad3i8dq4tsmb0"
     var site = `https://finnhub.io/api/v1/quote?symbol=${input}&token=${myKey}`
     fetch(site).then(async function(response) {
         if (response.ok) {
             const data = await response.json();
-            // console.log(data);
+            console.log(data);
             displayStockData(data);
+            
         } else {
             alert('Error: Search not found.')
         };
     }).catch(function(error){
         console.log(error);
-        alert("Unable to connect to database")
+        console.log("Unable to connect to database")
     })
 };
 
-var stockNews = ()=> {
+// Get the trending stock news 
+function stockNews() {
     var myKey = "c7t7lsqad3i8dq4tsmb0"
     var site = `https://finnhub.io/api/v1/news?category=general&token=${myKey}`;
 
@@ -251,12 +254,100 @@ var stockNews = ()=> {
         };
     }).catch(function(error){
         console.log(error);
-        alert("Unable to connect to database")
+        console.log("Unable to connect to database")
     })
 }
+var stockSearchArr = [];
+var stockListEl = document.querySelector(".stock-history");
 
+// Save searches to Local Storage. 
+var saveStockSearch = (search)=> {
+    //Create Button 
+    stockEl = document.createElement("button");
+    stockEl.textContent = search;
+    stockEl.classList = ("save-search btn");
+    stockEl.setAttribute = ("type", "submit");
+    stockEl.setAttribute = ("data-stocks", search);
+    //Append to the List 
+    stockListEl.appendChild(stockEl);
+    
+    if (!stockSearchArr.includes(search)) {
+        stockSearchArr.push(search);
+    }
+    JSON.parse(localStorage.setItem("stocks", JSON.stringify(stockSearchArr)));
+}
 
+var cryptoSearchArr = [];
+var cryptoListEl = document.querySelector(".crypto-history");
+
+// Save searches to Local Storage. 
+var saveCryptoSearch = (search)=> {
+    //Create Button 
+    cryptoEl = document.createElement("button");
+    cryptoEl.textContent = search;
+    cryptoEl.classList = ("save-search btn");
+    cryptoEl.setAttribute = ("type", "submit");
+    cryptoEl.setAttribute = ("data-crypto", search);
+    //Append to the List 
+    cryptoListEl.appendChild(cryptoEl);
+    
+    if (!cryptoSearchArr.includes(search)) {
+        cryptoSearchArr.push(search);
+    }
+    JSON.parse(localStorage.setItem("crypto", JSON.stringify(cryptoSearchArr)))
+}
+
+var getStockSearch = ()=> {
+    // load the data or start a new array if there is no data 
+    var savedStock = JSON.parse(localStorage.getItem("stocks")) ?? [];
+    // Append Data to list 
+    for (let i  = 0; savedStock.length; i++) {
+        var stockEl = document.createElement("button")
+        stockEl.classList = "save-search btn";
+        stockEl.setAttribute("type", "submit");
+        stockEl.setAttribute("data-stock", savedStock[i]);
+        var text = savedStock[i]
+        stockEl.textContent = `${text}`;
+        stockListEl.appendChild(stockEl)
+    }
+
+}
+
+var getCryptoSearch = ()=> {
+    // load the data or start a new array if there is no data 
+    var savedCrypto = JSON.parse(localStorage.getItem("crypto")) ?? [];
+    // append data to list 
+    for (let i  = 0; savedCrypto.length; i++) {
+        var cryptoEl = document.createElement("button")
+        cryptoEl.classList = "save-search btn";
+        cryptoEl.setAttribute("type", "submit");
+        cryptoEl.setAttribute("data-crypto", savedCrypto[i]);
+        var text = savedCrypto[i]
+        cryptoEl.textContent = `${text}`;
+        cryptoListEl.appendChild(cryptoEl)
+    }
+
+}
+
+getCryptoSearch();
+getStockSearch();
 
 cryptoBtnEl.addEventListener("click", searchHandlerCrypto);
 stockBtnEl.addEventListener("click", searchHandlerStock);
+clearHistoryBtn.addEventListener("click", function(){
+    // console.log(listCityEl.childNodes)
+    var crypto = cryptoListEl.lastElementChild;
 
+    // Remove last element. Select next element to remove
+    while (crypto) {
+        cryptoListEl.removeChild(crypto);
+        crypto = cryptoListEl.lastElementChild;
+    
+    localStorage.removeItem("crypto");
+    }
+    var stock = stockListEl.lastElementChild;
+    while (stock) {
+        stockListEl.removeChild(stock);
+        stock = stockListEl.lastElementChild;
+    }
+})
