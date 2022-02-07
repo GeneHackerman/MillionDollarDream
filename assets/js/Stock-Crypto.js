@@ -49,7 +49,7 @@ var clearCryptoForm = ()=> {
 
 var searchHandlerCrypto = (event)=> {
  // console.log(event);
-    var searchVal = search.value.trim();
+    var searchVal = search.value.trim().toLowerCase();
     event.preventDefault();
     // clear form 
     clearCryptoForm();
@@ -147,7 +147,7 @@ function displayDetailedData(cryptoData) {
 };
 
 function displayTrending(trending) {
-    console.log(trending)
+    // console.log(trending)
     var list = trending.coins
     for (let i = 0; i < list.length; i++) {
         var trendingContainerEl = document.querySelector(".trending-container");
@@ -156,7 +156,7 @@ function displayTrending(trending) {
 
         // Get Coin from list
         var coinEl = document.createElement("h5");
-        var rank = `${i+1}: ${list[i].item.name}`;
+        var rank = `#${i+1} ${list[i].item.name}`;
         coinEl.textContent = rank
 
         // Get Market Cap Rank
