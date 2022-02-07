@@ -1,9 +1,8 @@
 :root {
-    --primary: #2ecc71;
-    --secondary: #16a085;
-    --tertiary: #f1c40f;
-    --gold: 
-    --border-radius: .3rem;
+    --primary: #000000;
+    --secondary: #ffffff;
+    --tertiary: #b09451;
+    --border-radius: 10px;
   }
 
   * {
@@ -13,112 +12,124 @@
   
   body {
     background-color: var(--primary);
-    margin: 0;
-    padding: 0;
     font-family: "IBM Plex Sans", sans-serif;
     color: var(--tertiary);
-    line-height: 1.5;
-    font-size: 16px;
   }
 
   h1, p {
-    font-weight: 700;
     margin: 20px;
     color: var(--tertiary);
     line-height: 1.25;
   }
 
   .hero {
-    padding: 1% 2%;
+    padding: 0 0 0 0;
     background-color: var(--secondary);
-    color: var(--primary);    
+    color: var(--primary); 
+    border-radius: 15px;   
   }
+
+
+
+  /* -------------------------LOGO / IMAGE -----------------------------------*/
 
   .img {
-    padding: 0 10px 10px;
-    margin-left: 300px; 
-    margin-bottom: -20px;
-    margin-top: -150px;
+    padding: 0 0 0;
+    margin-left: 600px; 
+    margin-bottom: 5px;
+    margin-top: 1px;
+    border-radius: 0px;
   }
 
 
-  #feedDiv {
-      padding: 2% 4%;
-      color: green;
-  }
+
+  /* -------------------- (Containers 1 & 2: [1 - Search by Stock & Crypto] + [2 - Stock/Crypto Searches]) ---------------- */
 
   main {
     margin: 20px 0 auto 30px;
     width: 30%;
+    align-content: left;
   }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
-  margin: 0;
+
+
+h6 {   /* ---------------------------- H6 is Container 2 : News About Stocks and Crypto ---------------------------------- */
+  
+  margin: 0 0 0 0;
   color: var(--tertiary);
-  line-height: 1.25;
+  line-height: 50px;
   font-size: 30px;
 }
 
-.app-title {
-  font-size: 3rem;
-  background-color: var(--primary);
-  color: var(--tertiary);
-  padding: 0 20px;
-  display: inline-block;
-  border-radius: var(--border-radius);
-  box-shadow: 6px 5px var(--tertiary);
+.card-body {  
+  padding: 15px;
 }
 
-/* CARDS */
-.card {
-  margin: 0 0 20px 0;
-  border: 3px solid var(--tertiary);
+.app-title {
+  font-size: 50px;
+  background-color: var(--primary);
+  color: var(--tertiary);
+  padding: 0 50px;
+  display: inline-block;
   border-radius: var(--border-radius);
+}
+
+/* ------------------------------------------ CARDS-------------------------------------------------- */
+.card {
+  margin: 20px;
+  padding-left: 10px;
+  border: 3px solid var(--tertiary);
+  border-radius: 15px;
 }
 
 .card-header {
   color: var(--primary);
   /* background-color: var(--gold); <-- card header color undecided for now */  
-  padding: 2.5%;
+  padding: 10px;
   border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
 }
 
-.card-body {
-  padding: 2.5%;
-}
 
-.col-2 {
-  padding: 10px;
-  margin: 10px 600px auto 650px;
+.col-2 { /* ---------------------- PACK OF CARDS / COLUMN 2 WITH NEWS ABOUT STOCKS & CRYPTO ----------------------------*/
+  padding: 100px;
+  margin: 10px;
   display: flex;
 }
 
-/* form */
-.form-label,
-.form-input,
+/* form ------???? What is this ??????? */
+.form-label {
+}
+.form-input {
+
+  
+}
 .form-textarea {
   display: block;
 }
 
+
+/* ------------------- "Stock/Crypto Name" Section --------------------- */ 
 .form-label {
-  font-size: 1.1rem;
-  margin: 0 0 0 5px;
+  font-size: 30px;
+  margin: 0 0 0 0;
 }
+
+
+
+/* ------------------- INPUT after Stock/Crypto Name --------------------- */ 
 
 .form-input {
   width: 100%;
   padding: 3%;
   margin: 5px 0;
-  font-size: 1.2rem;
+  font-size: 5px;
   border: 2px solid var(--primary);
   border-radius: var(--border-radius);
 }
+
+
+
+/* ---------------------------------- STOCKS & CRYPTO LATEST NEWS ----------------------*/
 
 .subtitle {
   width: 150%;
@@ -128,54 +139,62 @@ h6 {
   display: flex;
 }
 
-/* clear history button */
+/* ----------------------------CLEAR HISTORY BUTTON ---------------------------------- */
 .hide {
   display: none;
 }
 
+
+/* -------------------------- Hover Button ---------------------- */
 .city-btn:hover {
   background-color: #f6f5f5;
   cursor: pointer;
 }
 
 
-/* smaller desktop screens and smaller */
+/* ------------------------- MEDIA QUERIES: Smaller desktop screens -------------------- */
+
 @media only screen and (max-width: 980px) {
   header {
     text-align: left;
-    min-width: 100%;
     margin: auto;
   }
 
   .subtitle {
-    margin: 0 40px 60px auto;
-    text-align: center;
+    margin: 0 0 0 0;
+    text-align: left;
   }  
 
   .col-2 {
     padding: 0 60px -60px 0;
     margin: 20px;
-    margin-top: -50px;
+    width: 20px;
   }
 
+
+
+/* ------------------------- MAIN -------------------- */
+
+
   main {
-    margin: 10px 5px 10px 20px;
-    padding-bottom: 0 30px 40px;
+    margin: 0 0 0 0 ;
+    padding-bottom: 0;
   }
 
 }
 
-/* Medium devices (landscape tablets and smaller) */
+/* ---------------------------- MEDIA QUERIES: Medium devices (landscape tablets and smaller)------------------------*/
 @media only screen and (max-width: 768px) {
   .hero {
     text-align: left;
+
   }
 }
 
-/* Media Query FOR MOBILE PHONES AND SMALLER */
+/* ------------------------------ MEDIA QUERIES: Mobile Phones ------------------------------------------------------- */
 @media screen and (max-width: 575px) {
   .img {
-    padding-left: 100px;
+    padding-left: 50px;
   }
 
   .card {
@@ -183,13 +202,26 @@ h6 {
   }
   
   .card-body {
-    padding-right: 10px;
+    padding-right: 20px;
     padding-left: 10px;
   }
 
   .col-12 {
     display:inline-block;
   }
+}
+
+
+/* Background Video-->*/
+#myVideo {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+  /*width:100%;
+  min-width:100%;*/
+	height: 30%;
+	min-height: 130%;
+	z-index: -10000;
 }
 
 
