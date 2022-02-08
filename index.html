@@ -30,101 +30,105 @@
 <!-----------------------------SAMPLE HEADER------------------------------------------------>
 
 <body class="flex-column min-100-vh">
-    <header class="hero">      
-    
-      <img src="./assets/images/2.png" class="img" width="600" height="600" alt="">
-    </header>
+  <div class="container">
+    <div class="row">
+      <header class="col s12 hero">      
+        <img src="./assets/images/2.png" class="img" height="200" width="200" alt="Site logo">
+      </header>  
+    </div>
 
     
-  <main class="flex-row justify-space-between">
-    <div class="col-12 col-md-8">
-      <div class="card">
-        <h2 class="card-header text-uppercase">Search By Stock or Crypto Currency</h3>
-        <form id="user-form" class="card-body">
-          <label class="form-label" for="username">Stock/Crypto Name</label>
-          <input name="search" placeholder="Bitcoin, AAPL" id="search" type="text" autofocus="true" class="form-input" />
-          <button type="submit" class="btn crypto-btn">CHASE THE COINS</button>
-          <button type="submit" class="btn stock-btn">CHASE THE STOCKS</button>
+    <main class="row">
+      <div class="col s12 m7 l6">
+        <div class="card">
+          <h1 class="card-title text-uppercase">Search By Stock or Crypto Currency</h1>
+          <form id="user-form" class="card-content">
+            <label class="form-label" for="username">Stock/Crypto Name</label>
+            <input name="search" placeholder="Bitcoin, AAPL" id="search" type="text" autofocus="true" class="form-input" />
+            <button type="submit" class="btn crypto-btn">CHASE THE COINS</button>
+            <button type="submit" class="btn stock-btn">CHASE THE STOCKS</button>        
+          </form>
+        </div>
+        
+        <div class="history card">
+          <div class="card-content">
+            <h2 class="card-title text-uppercase">Crypto Searches:</h2>
+            <div class="crypto-history">
+            </div>
+  
+            <h2 class="card-title text-uppercase">Stock Searches:</h2> 
+            <div class="stock-history">
+            </div>
+          <button id="clear-history" class="btn btn-sm btn-secondary">Clear History</button>
+  
+          </div>
+        </div>
 
-        </form>
       </div>
       
-      <div class="card">
-        <h3 class="card-header text-uppercase">Crypto Searches:</h3>
-        <div class="crypto-history">
-        </div>
 
-        <h3 class="card-header text-uppercase">Stock Searches:</h3> 
-        <div class="stock-history">
-
-
-        </div>
-      <button id="clear-history" class="btn btn-sm btn-secondary">Clear History</button>
+      <div class="col s12 m5 l6 justify-space-between">
+        <h3 class="subtitle"> What's in the Bag? <span id="repo-search-term"></span></h3>
+        <div id="repos-container" class="list-group"></div>
       </div>
 
-    </div>
-    
-
-    <div class="col-12 col-md-8 justify-space-between">
-      <h3 class="subtitle"> What's in the Bag? <span id="repo-search-term"></span></h3>
-
-      <div id="repos-container" class="list-group"></div>
-    </div>
-    
-  </main>
+      <div class="col s12 m5 l6 center">
+        <div class="hide" id="crypto">
+          <!-- <div class="col-2"> -->
+            <div class="card">
+              <div class="card-content">
+                <h4 class="search card-title"></h4>              
+                <p class="symbol"></p>
+                <p class="price"></p>
+                <p class="percent"> </p>
+                <p class="market-cap"></p>
+                <p class="volume"></p>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+        <div class="hide" id="stocks">
+            <div class="card">
+              <div class="card-content">
+                <h4 class="stock-search card-title"></h4>
+                  <p class="stock-price"></p>
+                  <p class="stock-percent"></p>
+                  <p class="high"></p>
+                  <p class="low"></p>
+              </div>
+            </div>
+        </div>
+      </div>
+      
+    </main>
      
-  <!--------------------------------- CRYPTO/ STOCK STATS ----------------------------->
-     <div class="hide" id="crypto">
-      <div class="col-2">
-        <div class="card flex-row">
-          <div class="card-body">
-            <h3 class="search"></h5>              
-            <p class="symbol"></p>
-            <p class="price"></p>
-            <p class="percent"> </p>
-            <p class="market-cap"></p>
-            <p class="volume"></p>
+    <!--------------------------------- CRYPTO/ STOCK STATS ----------------------------->
+
+     <div class="row">
+       <div class="col s12 center">
+        <div class=" trending-container">
+          <h5 class=" trending-coins">Top Trending Coins:</h5>
+        </div>
+       </div>
+     </div>
+      
+
+      <div class="row">
+        <div class="col s12 center">
+          <div class="news" id="card-container">
+            <h5 class="trending-news">Some News You Might Like:</h5>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hide" id="stocks">
-      <div class="col-2">
-        <div class="card flex-row">
-          <div class="card-body">
-
-
-
-           <!----------------------- STOCK CALLS ---------------------------------->
-            <h3 class="stock-search">yp</h5>
-            <p class="stock-price">yo</p>
-            <p class="stock-percent">yo</p>
-            <p class="high">yo</p>
-            <p class="low">yo</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="trending">
-     
-      <div class="trending-container col-2">
-        <h4 class="trending-coins">Buy These Coins:</h5>
-        
-        
-      </div>
-    </div>
-
-    <div class="news"> 
-      <div class="col-2" id="card-container">
-      </div>
+      
 
       <!-- Background video -->   
-     <video autoplay muted loop id="myVideo">
+     <!-- <video autoplay muted loop id="myVideo">
     	<source src="assets/video/Stocks&Crypto_mp4_1.mp4" type="video/mp4">
-    </video>
+    </video> -->
 
 
     </div>
+  </div>  
   <script src="assets/js/Stock-Crypto.js"></script>
 </body>

@@ -149,13 +149,16 @@ function displayDetailedData(cryptoData) {
 function displayTrending(trending) {
     // console.log(trending)
     var list = trending.coins
-    for (let i = 0; i < list.length; i++) {
+    for (let i = 0; i < 3; i++) {
         var trendingContainerEl = document.querySelector(".trending-container");
+        var trendingColEl = document.createElement("div");
+        var trendingContentEl = document.createElement("div");
         var trendingCardEl = document.createElement("div");
-        trendingCardEl.classList = "card flex-row";
-
+        trendingCardEl.classList = "card horizontal center";
+        trendingColEl.classList = "col s12 l4"
         // Get Coin from list
-        var coinEl = document.createElement("h5");
+        var coinEl = document.createElement("h6");
+        coinEl.classList = "card-title center"
         var rank = `#${i+1} ${list[i].item.name}`;
         coinEl.textContent = rank
 
@@ -175,13 +178,18 @@ function displayTrending(trending) {
         var image = list[i].item.thumb;
         imageEl.setAttribute("src", image);
 
-        symbolEl.appendChild(imageEl);
+        var symbolConEl = document.createElement("div")
+        symbolConEl.classList = "coin-symbol"
+        symbolConEl.appendChild(symbolEl);
+        symbolConEl.appendChild(imageEl);
 
         // append to page 
-        trendingCardEl.appendChild(coinEl);
-        trendingCardEl.appendChild(symbolEl);
-        trendingCardEl.appendChild(marketEl);
-        trendingContainerEl.appendChild(trendingCardEl);
+        trendingContentEl.appendChild(coinEl);
+        trendingContentEl.appendChild(symbolConEl);
+        trendingContentEl.appendChild(marketEl);
+        trendingCardEl.appendChild(trendingContentEl);
+        trendingColEl.appendChild(trendingCardEl)
+        trendingContainerEl.appendChild(trendingColEl);
 
     }
 }
@@ -247,7 +255,7 @@ function getCryptoData(coin) {
 
 // Finhib API Search by stock symbol
 function displayStockData(stockData) {
-    // console.log(stockData);
+    console.log(stockData);
     // My price value 
     var price = stockData.c
     stockPriceEl.textContent = `Price: ${price}`
@@ -262,7 +270,6 @@ function displayStockData(stockData) {
     var low = stockData.l
     stockHighEl.textContent = `Today's High: ${high}`
    stockLowEl.textContent = `Today's Low: ${low}`
-    var searchVal = search.value.trim().toUpperCase()
 }
 
 function getStockData(input) {
@@ -301,24 +308,21 @@ function displayNews(news) {
         var time = `${month}/${date}/${year}`;
         return time;
     }
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
         // Containers
         var cardContainerEl = document.querySelector("#card-container");
         var cardEl = document.createElement("div");
         var cardBodyEl = document.createElement("div");
-        cardEl.classList= "card flex-row";
-        cardBodyEl.setAttribute("class", "card-body");
-
-        // Date 
-        var dateEl = document.createElement("h5");
-        var unixdate = news[i].datetime;
-        var date = timeConverter(unixdate);
-        dateEl.textContent = date;
+        var cardColEl = document.createElement("div");
+        cardColEl.classList = "col s12"
+        cardEl.classList= "card";
+        cardBodyEl.setAttribute("class", "card-content");
 
         // Headline
         var headlineEl = document.createElement("h6");
         var headline = news[i].headline;
         headlineEl.textContent = headline;
+        headlineEl.classList = "card-title"
         
         // Image
         var imageEl = document.createElement("img");
@@ -326,6 +330,7 @@ function displayNews(news) {
         imageEl.setAttribute("height", "150");
         imageEl.setAttribute("width", "200");
         imageEl.setAttribute("src", image);
+        imageEl.classList = "card-image"
     
         // Link to article
         var linkEl = document.createElement("a");
@@ -333,13 +338,15 @@ function displayNews(news) {
         linkEl.setAttribute("target", "_blank");
         linkEl.setAttribute("href", link);
         linkEl.appendChild(imageEl);
+       
 
         // Append to document. 
-        cardBodyEl.appendChild(dateEl);
+        
         cardBodyEl.appendChild(headlineEl);
         cardBodyEl.appendChild(linkEl);
         cardEl.appendChild(cardBodyEl);
-        cardContainerEl.appendChild(cardEl);
+        cardColEl.appendChild(cardEl);
+        cardContainerEl.appendChild(cardColEl);
     }  
 }
 
@@ -371,7 +378,7 @@ var saveStockSearch = (search)=> {
     //Create Button 
     stockEl = document.createElement("button");
     stockEl.textContent = search;
-    stockEl.classList = ("save-search btn");
+    stockEl.classList = "save-search btn";
     stockEl.setAttribute = ("type", "submit");
     stockEl.setAttribute = ("data-stocks", search);
     //Append to the List 
@@ -391,7 +398,7 @@ var saveCryptoSearch = (search)=> {
     //Create Button 
     cryptoEl = document.createElement("button");
     cryptoEl.textContent = search;
-    cryptoEl.classList = ("save-search btn");
+    cryptoEl.classList = "save-search btn";
     cryptoEl.setAttribute = ("type", "submit");
     cryptoEl.setAttribute = ("data-crypto", search);
     //Append to the List 
