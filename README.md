@@ -45,10 +45,13 @@ Features to implement in the future:
    Local.storage to save search history(WIP) and adjusting further elements in HTML.
 
 
-Screenshot:
-![coinchase](https://user-images.githubusercontent.com/93616797/152447172-9bd1ef82-ae0c-4130-be45-411aec8b9761.png)
-![clearpage](https://user-images.githubusercontent.com/93616797/152447195-033516b9-b374-4f13-b16b-b6831565cc89.png)
-![mobileview1](https://user-images.githubusercontent.com/93616797/152688721-7d7f432b-938d-40a1-aac4-1a145a428e9e.png)
-![mobileview2](https://user-images.githubusercontent.com/93616797/152688727-7aa285cb-ed29-480c-bf82-e069b1a34f80.png)
+Screenshots:
+
+<img width="1440" alt="Screen Shot 2022-02-07 at 10 00 06 PM" src="https://user-images.githubusercontent.com/92960832/152910560-4ca48c88-2ebd-4850-bd78-fb136a8acd00.png">
+<img width="1243" alt="Screen Shot 2022-02-07 at 10 04 00 PM" src="https://user-images.githubusercontent.com/92960832/152910570-71ea60b2-cb34-4f84-9b1b-e01454b20715.png">
+<img width="662" alt="Screen Shot<img width="1068" alt="Screen Shot 2022-02-07 at 10 05 06 PM" src="https://user-images.githubusercontent.com/92960832/152910671-3938041a-753c-4542-8a16-b4eb4937f0a9.png">
+
+
+
 
 
