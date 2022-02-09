@@ -387,8 +387,11 @@ var saveStockSearch = (search)=> {
     if (!stockSearchArr.includes(search)) {
         stockSearchArr.push(search);
     }
-    JSON.parse(localStorage.setItem("stocks", JSON.stringify(stockSearchArr)));
+//    localStorage.setItem("stocks", JSON.stringify(stockSearchArr));
+localStorage.setItem("stocks", 'random');
+
 }
+
 
 var cryptoSearchArr = [];
 var cryptoListEl = document.querySelector(".crypto-history");
@@ -407,14 +410,15 @@ var saveCryptoSearch = (search)=> {
     if (!cryptoSearchArr.includes(search)) {
         cryptoSearchArr.push(search);
     }
-    JSON.parse(localStorage.setItem("crypto", JSON.stringify(cryptoSearchArr)))
+localStorage.setItem("crypto", JSON.stringify(cryptoSearchArr))
 }
 
 var getStockHistory = ()=> {
     // load the data or start a new array if there is no data 
     var savedStock = JSON.parse(localStorage.getItem("stocks")) ?? [];
     // Append Data to list 
-    for (let i  = 0; savedStock.length; i++) {
+    console.log(savedStock);
+    for (let i  = 0; i < savedStock.length; i++) {
         var stockEl = document.createElement("button")
         stockEl.classList = "save-search btn";
         stockEl.setAttribute("type", "submit");
@@ -423,14 +427,13 @@ var getStockHistory = ()=> {
         stockEl.textContent = `${text}`;
         stockListEl.appendChild(stockEl)
     }
-
 }
 
 var getCryptoHistory = ()=> {
     // load the data or start a new array if there is no data 
     var savedCrypto = JSON.parse(localStorage.getItem("crypto")) ?? [];
     // append data to list 
-    for (let i  = 0; savedCrypto.length; i++) {
+    for (let i  = 0; i < savedCrypto.length; i++) {
         var cryptoEl = document.createElement("button")
         cryptoEl.classList = "save-search btn";
         cryptoEl.setAttribute("type", "submit");

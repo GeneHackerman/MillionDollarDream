@@ -68,7 +68,6 @@
 
 
 h6 {   /* ---------------------------- H6 is Container 2 : News About Stocks and Crypto ---------------------------------- */
-  
 
   color: var(--tertiary);
   font-size: 10px;
@@ -104,9 +103,6 @@ h6 {   /* ---------------------------- H6 is Container 2 : News About Stocks and
   border: 2px solid var(--primary);
   border-radius: var(--border-radius);
 }
-
-
-
 
 .hide {
   display: none;
