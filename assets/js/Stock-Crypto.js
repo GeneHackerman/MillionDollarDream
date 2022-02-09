@@ -387,8 +387,7 @@ var saveStockSearch = (search)=> {
     if (!stockSearchArr.includes(search)) {
         stockSearchArr.push(search);
     }
-//    localStorage.setItem("stocks", JSON.stringify(stockSearchArr));
-localStorage.setItem("stocks", 'random');
+   localStorage.setItem("stocks", JSON.stringify(stockSearchArr));
 
 }
 
